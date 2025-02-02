@@ -1,4 +1,4 @@
-# Python PostgreSQL REST API framework
+# Python PostgreSQL REST API framework for AWS Lambda functions
 > [!NOTE]
 > Project status: `Alpha`
 
