@@ -1,0 +1,21 @@
+name: Integration Tests
+
+# Only run on PRs to the main branch
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout project code
+      - uses: actions/checkout@v3
+
+      # Use python setup action to configure version
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      # Install python poetry and dependencies for use in later steps
+      - run: ./scripts/integration-tests.sh
