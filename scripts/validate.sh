@@ -17,12 +17,13 @@ ruff check
 echo "Running pylint"
 pylint src tests
 
-# Run tests and generate coverage reports
-echo "Running pytest"
+# Run unit tests and generate coverage reports
+echo "Running pytest for unit tests"
 pytest --cov="$PACKAGE_NAME" \
   --cov-report term \
   --cov-report html \
-  --cov-fail-under=100.00
+  --cov-fail-under=100.00 \
+  tests/unit
 
 # Check the build
 python -m build

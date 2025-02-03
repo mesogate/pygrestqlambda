@@ -19,12 +19,14 @@ classifiers = [
 
 dependencies = [
   "aws-xray-sdk",
-  "boto3"
+  "boto3",
+  "psycopg[binary]"
 ]
 
 [project.optional-dependencies]
 dev = [
   "build",
+  "docker",
   "pylint",
   "pytest",
   "pytest-cov",

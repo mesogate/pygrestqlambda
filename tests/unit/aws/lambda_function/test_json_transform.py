@@ -4,7 +4,7 @@ Test JSON transformation for lambda proxy integration response
 
 from uuid import uuid4
 from datetime import datetime
-from pygrestqlambda.aws.lambda_function.json_transform import json_output
+from pygrestqlambda.aws.lambda_function.json_transform import to_string
 
 
 def test_uuid():
@@ -14,7 +14,7 @@ def test_uuid():
 
     uid = uuid4()
 
-    assert json_output(uid) == str(uid)
+    assert to_string(uid) == str(uid)
 
 
 def test_datetime():
@@ -24,4 +24,4 @@ def test_datetime():
 
     now = datetime.now()
 
-    assert json_output(now) == now.isoformat()
+    assert to_string(now) == now.isoformat()
