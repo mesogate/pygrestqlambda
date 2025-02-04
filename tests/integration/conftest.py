@@ -6,29 +6,7 @@ client to manage postgres container.
 """
 
 from pytest import fixture
-from tests.integration.utils import (
-    wait_for_postgres_container,
-    remove_postgres_container,
-    get_postgres_connection,
-)
-
-
-def pytest_configure():
-    """
-    Runs before any tests, starts up postgres database to be used by tests.
-    Starts container on a random port and wait until a successful login is made.
-    """
-
-    wait_for_postgres_container()
-
-
-def pytest_unconfigure():
-    """
-    Runs after all tests, removes postgres container set up for this test suite
-    """
-
-    remove_postgres_container()
-
+from tests.integration.utils.connection import get_db_connection
 
 @fixture(scope="session")
 def db():
@@ -36,4 +14,4 @@ def db():
     Return a psycopg database connection
     """
 
-    return get_postgres_connection()
+    return get_db_connection()

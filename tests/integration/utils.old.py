@@ -74,25 +74,6 @@ def get_postgres_connection() -> Connection:
     except NotFound:
         container = create_postgres_container()
 
-    max_retries = 20
-    for i in range(1, max_retries + 1):
-        logging.info('Waiting for port to become available, attempt %s', i)
-        try:
-            print(container.status)
-            print(container.ports)
-            port = container.ports['5432/tcp'][0]['HostPort']
-            logging.info('Port %s available')
-            break
-        except KeyError as exc:
-            if i < max_retries:
-                logging.info('Port not available, retying')
-                sleep(3)
-            else:
-                raise ConnectionError(
-                    f'Port not ready after {max_retries} retries'
-                ) from exc
-
-
     port = container.ports['5432/tcp'][0]['HostPort']
 
     config = {

@@ -12,10 +12,5 @@ jobs:
       # Checkout project code
       - uses: actions/checkout@v3
 
-      # Use python setup action to configure version
-      - uses: actions/setup-python@v3
-        with:
-          python-version: '3.x'
-
-      # Install python poetry and dependencies for use in later steps
+      # Run integration tests
       - run: ./scripts/integration-tests.sh
