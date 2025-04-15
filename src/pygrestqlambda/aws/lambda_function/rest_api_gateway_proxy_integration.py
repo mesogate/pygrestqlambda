@@ -6,17 +6,17 @@ Returns payload structure expected by REST API Gateway
 https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-output-format
 """
 
-import logging
-import json
-from dataclasses import dataclass
-from pygrestqlambda.aws.lambda_function.json_transform import json_output
 from base64 import b64encode
+from dataclasses import dataclass
+import json
+import logging
+from pygrestqlambda.aws.lambda_function.json_transform import json_output
 
 
 @dataclass
-class LambdaFunctionProxyIntegrationResponse:
+class Response:
     """
-    Lambda function response
+    Lambda function proxy response for REST API Gateway
     """
     is_base64_encoded: bool | None = False
     status_code: int | None = 401
