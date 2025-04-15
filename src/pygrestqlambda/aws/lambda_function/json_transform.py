@@ -1,3 +1,7 @@
+"""
+JSON output transformer for non-serialisable values
+"""
+
 from uuid import UUID
 from datetime import datetime
 

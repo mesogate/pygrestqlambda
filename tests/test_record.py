@@ -1,8 +1,14 @@
-# from pygrestqlambda.db. import Record
+"""
+Test DB record
+"""
 
-# def test_record():
-#     """
+from pygrestqlambda.db.record import Record
 
-#     """
-#     record = Record()
-#     assert record.conn
+
+def test_record():
+    """
+    Test record
+    """
+
+    record = Record()
+    assert record.after_create() is None
