@@ -4,6 +4,9 @@ on:
   push:
     tags: [ '*.*.*' ]
 
+env:
+  PROJECT_VERSION: ${{ github.ref_name }}
+
 jobs:
   publish:
     runs-on: ubuntu-latest
