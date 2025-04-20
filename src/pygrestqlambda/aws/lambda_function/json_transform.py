@@ -2,9 +2,9 @@
 JSON output transformer for non-serialisable values
 """
 
+from datetime import date, datetime
+from decimal import Decimal
 from uuid import UUID
-from datetime import datetime
-
 
 def json_output(value: object) -> str:
     """
@@ -15,8 +15,15 @@ def json_output(value: object) -> str:
     if isinstance(value, UUID):
         value = str(value)
 
-    # Handle timestamps
+    # Handle date/timestamps
     if isinstance(value, datetime):
         value = value.isoformat()
+
+    if isinstance(value, date):
+        value = value.isoformat()
+
+    # Handle decimals
+    if isinstance(value, Decimal):
+        value = float(value)
 
     return value
