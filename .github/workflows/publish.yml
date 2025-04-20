@@ -19,6 +19,10 @@ jobs:
         with:
           python-version: '3.11'
 
+      # Run pre-publish step to update project version number to tag
+      - name: Pre-build
+        run: ./scripts/pre-publish.sh
+
       # Re-run validation and build
       - name: Validate
         run: ./scripts/validate.sh
