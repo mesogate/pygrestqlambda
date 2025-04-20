@@ -4,7 +4,7 @@ requires = ["hatchling"]
 
 [project]
 name = "pygrestqlambda"
-version = "0.0.2"
+version = "0.0.0"
 description = "PostgreSQL REST API framework for AWS Lambda functions"
 readme = "README.md"
 requires-python = ">=3.11"
