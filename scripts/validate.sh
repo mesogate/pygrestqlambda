@@ -20,6 +20,7 @@ pylint src tests
 # Run tests and generate coverage reports
 echo "Running pytest"
 pytest --cov="$PACKAGE_NAME" \
+  -n auto \
   --cov-report term \
   --cov-report html \
   --cov-fail-under=100.00
