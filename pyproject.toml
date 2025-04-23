@@ -25,6 +25,8 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "build",
+  "docker",
+  "psycopg[binary]",
   "pylint",
   "pytest",
   "pytest-cov",
