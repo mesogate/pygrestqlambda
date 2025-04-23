@@ -6,9 +6,9 @@ from datetime import date, datetime
 from decimal import Decimal
 from uuid import UUID
 
-def json_output(value: object) -> str:
+def to_string(value: object) -> str:
     """
-    Calculates the serialised version of an object to return in a JSON response
+    Calculates the string version of an object to return in a JSON response
     """
 
     # Handle UUIDs

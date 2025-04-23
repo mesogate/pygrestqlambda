@@ -5,7 +5,7 @@ Test JSON transformation for lambda proxy integration response
 from uuid import uuid4
 from datetime import date, datetime
 from decimal import Decimal
-from pygrestqlambda.aws.lambda_function.json_transform import json_output
+from pygrestqlambda.aws.lambda_function.json_transform import to_string
 
 
 def test_uuid():
@@ -15,7 +15,7 @@ def test_uuid():
 
     uid = uuid4()
 
-    assert json_output(uid) == str(uid)
+    assert to_string(uid) == str(uid)
 
 
 def test_datetime():
@@ -25,7 +25,7 @@ def test_datetime():
 
     now = datetime.now()
 
-    assert json_output(now) == now.isoformat()
+    assert to_string(now) == now.isoformat()
 
 
 def test_date():
@@ -34,7 +34,7 @@ def test_date():
     """
 
     today = date.today()
-    assert json_output(today) == today.isoformat()
+    assert to_string(today) == today.isoformat()
 
 
 def test_decimal():
@@ -42,5 +42,5 @@ def test_decimal():
     Test decimals are transformed correctly
     """
 
-    assert json_output(Decimal('1.0005')) == 1.0005
-    assert json_output(Decimal('1.00050')) == 1.0005
+    assert to_string(Decimal('1.0005')) == 1.0005
+    assert to_string(Decimal('1.00050')) == 1.0005
