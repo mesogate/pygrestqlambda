@@ -26,6 +26,7 @@ dependencies = [
 dev = [
   "build",
   "docker",
+  "httpx",
   "psycopg[binary]",
   "pylint",
   "pytest",
