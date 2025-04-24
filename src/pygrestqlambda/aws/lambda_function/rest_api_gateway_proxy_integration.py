@@ -11,6 +11,26 @@ from dataclasses import dataclass
 import json
 import logging
 from pygrestqlambda.aws.lambda_function.json_transform import to_string
+from pygrestqlambda.request_mapper.http_method import HttpMethod
+
+
+@dataclass
+class Request:
+    """
+    Request class
+    """
+
+    method: HttpMethod | None = None
+
+    def from_rest_api_lambda_proxy_integration(self, request: dict):
+        """
+        Parse JSON payload into request object
+        """
+
+        if 'httpMethod' in request:
+            self.method = str(request['httpMethod']).upper()
+
+        return self
 
 
 @dataclass

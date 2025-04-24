@@ -25,7 +25,8 @@ pytest --cov="$PACKAGE_NAME" \
   --cov-report html \
   --cov-fail-under=100.00 \
    -o log_cli=true \
-   --log-cli-level=INFO
+   --log-cli-level=INFO \
+   tests/unit
 
 # Check the build
 python -m build
