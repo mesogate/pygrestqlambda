@@ -23,6 +23,22 @@ class Response:
     headers: dict | None = None
     multi_value_headers: dict | None = None
     body: str | dict | None = None
+    use_default_cors_headers: bool = False
+
+
+    def get_default_cors_headers(self) -> dict:
+        """
+        Return default CORS headers
+        """
+
+        cors_headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "*",
+            "Access-Control-Allow-Headers": "*"
+        }
+
+        return cors_headers
+
 
     def get_payload(self) -> dict:
         """
@@ -45,6 +61,12 @@ class Response:
             else:
                 logging.debug("Using text/plain for content-type")
                 self.headers["Content-Type"] = "text/plain"
+
+        # Optionally include CORS headers
+        if self.use_default_cors_headers:
+            for key, value in self.get_default_cors_headers().items():
+                if key not in self.headers:
+                    self.headers[key] = value
 
         # Calculate body
         if self.is_base64_encoded:
