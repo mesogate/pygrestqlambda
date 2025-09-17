@@ -24,7 +24,7 @@ def test_json_response():
     assert json.loads(payload['body'])['hello'] == 'world'
 
 
-def test_plan_text_response():
+def test_plain_text_response():
     """
     Test plain text response is correctly prepared
     """
