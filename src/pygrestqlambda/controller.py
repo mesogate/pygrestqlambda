@@ -2,6 +2,7 @@
 Controller module to handle AWS API Gateway REST API proxy lambda integration
 """
 
+from pygrestqlambda.mime_type_transformer import get_mime_type, MimeTypeTransformer
 from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration import (
   Request,
   Response
@@ -18,13 +19,24 @@ class Controller:
         """
         self.request = Request(event=event)
         self.response = Response(use_default_cors_headers=True)
-
+        # Extract MIME type, set default if none detected
+        self.accept_mime_type = get_mime_type(self.request.accept)
+        # Extract method, needed
 
     def run(self):
         """
         Processes requests, executes appropriate callbacks and returns response
         """
 
+        # Exit if a requested MIME type has not been detected
+        if self.accept_mime_type is None:
+            self.response.status_code = 406
+            return self.response
+
+        # Set response headers
+        self.response.headers['content-type'] = self.accept_mime_type
+
+        # Extract request method to determine which operations to perform
         method = self.request.method.lower()
 
         if method == 'get':
@@ -42,6 +54,7 @@ class Controller:
         if method == 'delete':
             self.process_delete_request()
 
+
         return self.response
 
 
@@ -52,9 +65,10 @@ class Controller:
         """
 
         self.response.status_code = 200
-        self.response.body = {
+        data = {
             'result': 'read via GET'
         }
+        self.response.body = MimeTypeTransformer(data=data, mime_type=self.accept_mime_type)
 
 
     def process_post_request(self):
@@ -64,9 +78,10 @@ class Controller:
         """
 
         self.response.status_code = 201
-        self.response.body = {
+        data = {
             'result': 'created via POST'
         }
+        self.response.body = MimeTypeTransformer(data=data, mime_type=self.accept_mime_type)
 
 
     def process_put_request(self):
@@ -76,9 +91,10 @@ class Controller:
         """
 
         self.response.status_code = 201
-        self.response.body = {
+        data = {
             'result': 'created via PUT'
         }
+        self.response.body = MimeTypeTransformer(data=data, mime_type=self.accept_mime_type)
 
 
     def process_patch_request(self):
@@ -87,9 +103,10 @@ class Controller:
         """
 
         self.response.status_code = 200
-        self.response.body = {
+        data = {
             'result': 'updated via PATCH'
         }
+        self.response.body = MimeTypeTransformer(data=data, mime_type=self.accept_mime_type)
 
 
     def process_delete_request(self):
