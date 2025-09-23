@@ -3,7 +3,7 @@ Lambda handler
 """
 
 import logging
-from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration import Response
+from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration.response import Response
 
 def handler(event: dict, context: dict):
     """
