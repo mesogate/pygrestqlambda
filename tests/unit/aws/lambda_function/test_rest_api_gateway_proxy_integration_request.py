@@ -4,7 +4,7 @@ Test REST API Gateway lambda proxy integration response
 
 import json
 from pathlib import Path
-from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration import Request
+from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration.request import Request
 
 
 def test_request_nonbase64():

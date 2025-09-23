@@ -2,10 +2,8 @@
 Controller module to handle AWS API Gateway REST API proxy lambda integration
 """
 
-from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration import (
-  Request,
-  Response
-)
+from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration.request import Request
+from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration.response import Response
 
 class Controller:
     """
