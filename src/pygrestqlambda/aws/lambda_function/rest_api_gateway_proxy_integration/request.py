@@ -18,8 +18,8 @@ class Request:
         # Extract authorisation information
         self.cognito_uid = self.get_cognito_uid()
         # Extract headers needed for body and response
-        self.accept: str = self.get_header('accept')
-        self.content_type: str = self.get_header('content-type')
+        self.accept: str | None = self.get_header('accept')
+        self.content_type: str | None = self.get_header('content-type')
         # Extract resource
         self.resource = event.get('resource')
         self.method = event.get('httpMethod')
@@ -39,7 +39,7 @@ class Request:
         content = body
         if self.event.get('isBase64Encoded'):
             if body:
-                content = b64decode(body)
+                content = b64decode(body).decode('utf-8')
 
         # Handle no content type
         if self.content_type is None:
@@ -51,7 +51,8 @@ class Request:
 
         # Handle JSON
         if self.content_type.lower() == 'application/json':
-            return json.loads(content)
+            if isinstance(content, str):
+                return json.loads(content)
 
         return content
 
@@ -71,7 +72,7 @@ class Request:
         return cognito_uid
 
 
-    def get_header(self, header_name: str):
+    def get_header(self, header_name: str) -> str | None:
         """
         Retrieve Accept header
         """

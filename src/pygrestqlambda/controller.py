@@ -22,6 +22,8 @@ class Controller:
         """
         Processes requests, executes appropriate callbacks and returns response
         """
+        if not self.request.method:
+            return self.response
 
         method = self.request.method.lower()
 

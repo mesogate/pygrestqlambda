@@ -5,7 +5,16 @@ Test JSON transformation for lambda proxy integration response
 from uuid import uuid4
 from datetime import date, datetime
 from decimal import Decimal
+from pytest import raises
 from pygrestqlambda.aws.lambda_function.json_transform import to_string
+
+
+def test_string():
+    """
+    Test strings are not changed
+    """
+
+    assert to_string('test') == 'test'
 
 
 def test_uuid():
@@ -44,3 +53,12 @@ def test_decimal():
 
     assert to_string(Decimal('1.0005')) == 1.0005
     assert to_string(Decimal('1.00050')) == 1.0005
+
+
+def test_unknown_type():
+    """
+    Test decimals are transformed correctly
+    """
+
+    with raises(TypeError):
+        to_string(object())

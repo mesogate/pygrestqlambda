@@ -27,6 +27,7 @@ dev = [
   "build",
   "docker",
   "httpx",
+  "pyright",
   "psycopg[binary]",
   "pylint",
   "pytest",
