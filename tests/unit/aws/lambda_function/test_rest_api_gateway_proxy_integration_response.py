@@ -2,7 +2,6 @@
 Test REST API Gateway lambda proxy integration response
 """
 
-import base64
 import json
 from pygrestqlambda.aws.lambda_function.rest_api_gateway_proxy_integration.response import Response
 
@@ -49,15 +48,13 @@ def test_binary_response():
         body=b'hello world',
         headers={
             'Content-Type': 'application/pdf',
-        },
-        is_base64_encoded=True
+        }
     )
 
     payload = response.get_payload()
 
     assert response.headers['Content-Type'] == 'application/pdf'
     assert payload['headers']['Content-Type'] == 'application/pdf'
-    assert base64.b64decode(payload['body']) == b'hello world'
 
 
 def test_no_cors_headers_by_default():

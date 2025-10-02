@@ -6,24 +6,24 @@ from datetime import date, datetime
 from decimal import Decimal
 from uuid import UUID
 
-def to_string(value: object) -> str:
+def to_string(value: object) -> str | float:
     """
     Calculates the string version of an object to return in a JSON response
     """
 
-    # Handle UUIDs
     if isinstance(value, UUID):
+        # Handle UUIDs
         value = str(value)
-
-    # Handle date/timestamps
-    if isinstance(value, datetime):
+    elif isinstance(value, datetime):
+        # Handle date/timestamps
         value = value.isoformat()
-
-    if isinstance(value, date):
+    elif isinstance(value, date):
         value = value.isoformat()
-
-    # Handle decimals
-    if isinstance(value, Decimal):
+    elif isinstance(value, Decimal):
+        # Handle decimals
         value = float(value)
+    elif not isinstance(value, str):
+        # Handle non-string case
+        raise TypeError('Unhandled type')
 
     return value

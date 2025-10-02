@@ -68,3 +68,17 @@ def test_delete():
     response = controller.run()
 
     assert response.status_code == 204
+
+
+def test_no_method():
+    """
+    Verify no method
+    """
+
+    controller = Controller(
+        event={"httpMethod": None}
+    )
+
+    response = controller.run()
+
+    assert response.status_code == 401
