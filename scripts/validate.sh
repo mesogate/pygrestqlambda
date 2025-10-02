@@ -14,6 +14,9 @@ pip install .[dev]
 echo "Running ruff"
 ruff check
 
+echo "Running pyright"
+pyright src
+
 echo "Running pylint"
 pylint src tests
 
