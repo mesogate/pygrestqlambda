@@ -18,14 +18,22 @@ echo "Running pylint"
 pylint src tests
 
 # Run tests and generate coverage reports
-echo "Running pytest"
+echo "Running pytest unit tests"
 pytest --cov="$PACKAGE_NAME" \
   -n auto \
   --cov-report term \
   --cov-report html \
   --cov-fail-under=100.00 \
-   -o log_cli=true \
-   --log-cli-level=INFO
+  -o log_cli=true \
+  --log-cli-level=INFO \
+  tests/unit
+
+echo "Running pytest integration tests"
+pytest \
+  -n auto \
+  -o log_cli=true \
+  --log-cli-level=INFO \
+  tests/integration
 
 # Check the build
 python -m build
